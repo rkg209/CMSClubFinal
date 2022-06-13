@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/it"
+        android:title="Information technology"/>
+    <item android:id="@+id/cse"
+        android:title="computer science and engineering"/>
+    <item android:id="@+id/civil"
+        android:title="Civil"/>
+    <item android:id="@+id/mech"
+        android:title="Mechanical"/>
+    <item android:id="@+id/elct"
+        android:title="Electrical"/>
+    <item android:id="@+id/entc"
+        android:title="Electronics"/>
+</menu>
