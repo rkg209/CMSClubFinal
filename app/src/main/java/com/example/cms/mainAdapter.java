@@ -52,6 +52,8 @@ public class mainAdapter extends RecyclerView.Adapter<mainAdapter.MyViewHolder> 
     }
 
     public void filterList(ArrayList<com.example.cms.main> filteredlist) {
+        list = filteredlist;
+        notifyDataSetChanged();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

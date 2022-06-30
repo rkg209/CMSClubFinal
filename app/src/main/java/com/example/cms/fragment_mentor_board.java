@@ -99,9 +99,7 @@ public class fragment_mentor_board extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 filter(charSequence.toString());
-
             }
 
             @Override

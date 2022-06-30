@@ -41,6 +41,7 @@ public class MainBoardAddPage extends AppCompatActivity
     private DatabaseReference dbRef;
     private FirebaseStorage storage;
     private static String currentUser;
+    private static String logouri ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class MainBoardAddPage extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //firebase code to add member details to database
-                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
                 String name = ed_new_member_name.getText().toString();
                 String post = ed_new_member_post.getText().toString();
 
@@ -85,39 +86,41 @@ public class MainBoardAddPage extends AppCompatActivity
                 HashMap<String,Object> hashMap = new HashMap<>();
                 hashMap.put("Name", name);
                 hashMap.put("Position", post);
+                if(logouri.equals("")){hashMap.put("Photo","");}
+
 
                 switch (check)
                 {
                     case 1 :
-                        Toast.makeText(getApplicationContext(),"save data to firebase for mentor board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"save data to firebase for mentor board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for mentor board
 
                         dbRef.child("Club").child(currentUser).child("Board").child("Mentor").child(post).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainBoardAddPage.this, "Member Added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainBoardAddPage.this, "Member Added to Mentor Board", Toast.LENGTH_SHORT).show();
                             }
                         });
 
                         break;
                     case 2 :
-                        Toast.makeText(getApplicationContext(),"data img to firebase for main board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"data img to firebase for main board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for main board
 
                         dbRef.child("Club").child(currentUser).child("Board").child("Main").child(post).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainBoardAddPage.this, "Member Added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainBoardAddPage.this, "Member Added to Main Board", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
                     case 3 :
-                        Toast.makeText(getApplicationContext(),"data img to firebase for Assistant board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"data img to firebase for Assistant board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for Assistant board
                         dbRef.child("Club").child(currentUser).child("Board").child("Assistant").child(post).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainBoardAddPage.this, "Member Added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainBoardAddPage.this, "Member Added to Assistant Board", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -134,11 +137,12 @@ public class MainBoardAddPage extends AppCompatActivity
         profile.setImageURI(uri);
         //String clubName = "WSM";
         String post = ed_new_member_post.getText().toString();
+        logouri=uri.toString();
 
         switch (check)
         {
             case 1 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for mentor board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"save img to firebase for mentor board",Toast.LENGTH_SHORT).show();
                 //save img to firebase for mentor board
                 StorageReference MBreference= storage.getReference().child(currentUser+"/Mentor Board/"+post+".jpg");
                 MBreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -154,7 +158,7 @@ public class MainBoardAddPage extends AppCompatActivity
                 });
                 break;
             case 2 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for main board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"save img to firebase for main board",Toast.LENGTH_SHORT).show();
                 //save img to firebase for main board
                 StorageReference Mreference= storage.getReference().child(currentUser+"/Main Board/"+post+".jpg");
                 Mreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -170,7 +174,7 @@ public class MainBoardAddPage extends AppCompatActivity
                 });
                 break;
             case 3 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for Assistant board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"save img to firebase for Assistant board",Toast.LENGTH_SHORT).show();
                 //save img to firebase for Assistant board
                 StorageReference Areference= storage.getReference().child(currentUser+"/Assitant Board/"+post+".jpg");
                 Areference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

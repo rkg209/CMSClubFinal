@@ -25,7 +25,7 @@
             android:drawableStart="@drawable/custom_search_icon"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="username"
+            android:hint="Search Name"
             android:inputType="textPersonName"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"

@@ -90,7 +90,7 @@ public class fragment_main_board extends Fragment {
         });
 
 
-        Toast.makeText(getContext(), "enter1", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "enter1", Toast.LENGTH_SHORT).show();
         //
         database.child("Club").child(currentUser).child("Board").child("Main").addValueEventListener(new ValueEventListener() {
             @Override

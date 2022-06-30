@@ -139,7 +139,7 @@ public class UpdateProfile extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(UpdateProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateProfile.this, "Profile Saved", Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(UpdateProfile.this, ClubHomePage.class));
                         }
                     }

@@ -135,19 +135,19 @@
             tools:ignore="HardcodedText" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_edit_post"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:drawableEnd="@drawable/ic_edit"
-            android:drawableTint="#f18600"
-            android:paddingEnd="9dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck,UnusedAttribute" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_edit_post"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:drawableEnd="@drawable/ic_edit"-->
+<!--            android:drawableTint="#f18600"-->
+<!--            android:paddingEnd="9dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck,UnusedAttribute" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

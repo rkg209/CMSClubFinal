@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity
 
         com.example.cms.LoginAdapter loginAdapter = new com.example.cms.LoginAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        loginAdapter.addFragment(new com.example.cms.student_login(),"Student");
+        //loginAdapter.addFragment(new com.example.cms.student_login(),"Student");
         loginAdapter.addFragment(new com.example.cms.club_login(),"Club");
 
         viewPager.setAdapter(loginAdapter);

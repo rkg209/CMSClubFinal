@@ -67,9 +67,9 @@ public class BottomSheetDialog extends BottomSheetDialogFragment
                 switch (check)
                 {
                     case 1 :
-                        Toast.makeText(getContext(),"save data to firebase for mentor board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),"save data to firebase for mentor board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for mentor board
-                        Toast.makeText(getContext(), name, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), name, Toast.LENGTH_SHORT).show();
 
 //                        adapter=new mainAdapter(list,cd->{
 //                            Toast.makeText(getContext(),"Clicked"+cd.getName(),Toast.LENGTH_SHORT).show();
@@ -79,12 +79,12 @@ public class BottomSheetDialog extends BottomSheetDialogFragment
                        reference.child("Club").child(currentUser).child("Board").child("Mentor").child(position).child("Name").setValue(name);
                         break;
                     case 2 :
-                        Toast.makeText(getContext(),"save data to firebase for main board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),"save data to firebase for main board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for main board
                         reference.child("Club").child(currentUser).child("Board").child("Main").child(position).child("Name").setValue(name);
                         break;
                     case 3 :
-                        Toast.makeText(getContext(),"save data to firebase for Assistant board",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),"save data to firebase for Assistant board",Toast.LENGTH_SHORT).show();
                         //save data to firebase for Assistant board
                         reference.child("Club").child(currentUser).child("Board").child("Assistant").child(position).child("Name").setValue(name);
                         break;

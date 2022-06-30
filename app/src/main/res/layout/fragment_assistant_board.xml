@@ -23,7 +23,7 @@
             android:drawableStart="@drawable/custom_search_icon"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="username"
+            android:hint="Search Name"
             android:inputType="textPersonName"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="30dp"
-        tools:listitem="@layout/assistant_board_row"
+        tools:listitem="@layout/main_board_row"
         android:layout_marginBottom="55dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

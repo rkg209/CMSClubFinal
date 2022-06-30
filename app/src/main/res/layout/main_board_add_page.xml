@@ -17,7 +17,7 @@
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:src="@drawable/img_example"
+            android:src="@drawable/ic_baseline_account_circle_24"
             app:civ_border_color="#0080ff"
             app:civ_border_width="1dp" />
 

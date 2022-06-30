@@ -58,7 +58,7 @@ public class EditActivity extends AppCompatActivity
         txtpost = findViewById(R.id.txt_post_name);
 
         button1 = findViewById(R.id.btn_edit);
-        button2 = findViewById(R.id.btn_edit_post);
+        //button2 = findViewById(R.id.btn_edit_post);
         button3 = findViewById(R.id.btn_edit_profile_img);
         button4 = findViewById(R.id.btn_member_delete);
 
@@ -76,7 +76,7 @@ public class EditActivity extends AppCompatActivity
         switch (check)
         {
             case 1 :
-                Toast.makeText(getApplicationContext(),"Setting from mentor board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Setting from mentor board",Toast.LENGTH_SHORT).show();
 
                 reference.child("Club").child(currentUser).child("Board").child("Mentor").child(position).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -92,7 +92,7 @@ public class EditActivity extends AppCompatActivity
                 });
                 break;
             case 2 :
-                Toast.makeText(getApplicationContext(),"Setting from main board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Setting from main board",Toast.LENGTH_SHORT).show();
                 reference.child("Club").child(currentUser).child("Board").child("Main").child(position).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -106,7 +106,7 @@ public class EditActivity extends AppCompatActivity
                 });
                 break;
             case 3 :
-                Toast.makeText(getApplicationContext(),"setting member from Assistant board",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"setting member from Assistant board",Toast.LENGTH_SHORT).show();
                 reference.child("Club").child(currentUser).child("Board").child("Assistant").child(position).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -132,14 +132,14 @@ public class EditActivity extends AppCompatActivity
             }
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        /*button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
                 com.example.cms.BottomSheetDailogForPost bottomSheetDailogForPost = new com.example.cms.BottomSheetDailogForPost(check);
                 bottomSheetDailogForPost.show(getSupportFragmentManager(),"ModalBottomSheet");
             }
-        });
+        });*/
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,17 +160,17 @@ public class EditActivity extends AppCompatActivity
                 switch (check)
                 {
                     case 1 :
-                        Toast.makeText(getApplicationContext(),"Delete member from mentor board",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Member Deleted",Toast.LENGTH_SHORT).show();
                         //Delete member from mentor board
                         reference.child("Club").child(currentUser).child("Board").child("Mentor").child(position).removeValue();
                         break;
                     case 2 :
-                        Toast.makeText(getApplicationContext(),"Delete member from main board",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Member Deleted",Toast.LENGTH_SHORT).show();
                         //Delete member from main board
                         reference.child("Club").child(currentUser).child("Board").child("Main").child(position).removeValue();
                         break;
                     case 3 :
-                        Toast.makeText(getApplicationContext(),"Delete member from Assistant board",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Member Deleted",Toast.LENGTH_SHORT).show();
                         //Delete member from Assistant board
                         reference.child("Club").child(currentUser).child("Board").child("Assistant").child(position).removeValue();
                         break;
@@ -188,7 +188,7 @@ public class EditActivity extends AppCompatActivity
         switch (check)
         {
             case 1 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for mentor board",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Photo Changed",Toast.LENGTH_SHORT).show();
                 //save img to firebase for mentor board
                 StorageReference MBreference= storage.getReference().child(currentUser+"/Mentor Board/"+position+".jpg");
                 MBreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -204,7 +204,7 @@ public class EditActivity extends AppCompatActivity
                 });
                 break;
             case 2 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for main board",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Photo Changed",Toast.LENGTH_SHORT).show();
                 //save img to firebase for main
                 StorageReference MaBreference= storage.getReference().child(currentUser+"/Main Board/"+position+".jpg");
                 MaBreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -220,7 +220,7 @@ public class EditActivity extends AppCompatActivity
                 });
                 break;
             case 3 :
-                Toast.makeText(getApplicationContext(),"save img to firebase for Assistant board",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Photo Changed",Toast.LENGTH_SHORT).show();
                 //save img to firebase for Assistant board
                 StorageReference ABreference = storage.getReference().child(currentUser+"/Assistant Board/"+position+".jpg");
                 ABreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
