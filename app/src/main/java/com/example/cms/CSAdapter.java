@@ -23,15 +23,15 @@ import java.util.List;
 
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
+public class CSAdapter extends RecyclerView.Adapter<CSAdapter.MyViewHolder> {
     ArrayList<event> list;
-    public com.example.cms.OnEventClickListener listener;
+    public OnEventClickListener listener;
     DatabaseReference reference;
     private FirebaseUser user;
     private static String currentUser;
 
 
-    public Adapter(ArrayList<event> list, com.example.cms.OnEventClickListener listener) {
+    public CSAdapter(ArrayList<event> list, OnEventClickListener listener) {
         this.list = list;
         this.listener = listener;
         reference= FirebaseDatabase.getInstance().getReference();
@@ -44,7 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.event_row,parent,false);
-        return new Adapter.MyViewHolder(view);    }
+        return new MyViewHolder(view);    }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -55,9 +55,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             @Override
             public void onClick(View view) {
                 String Event = list.get(position).getDate();
-                reference.child("Club").child(currentUser).child("Event").child(Event).removeValue();
-                reference.child("EventList").child(Event +" "+ currentUser).removeValue();
-                reference.child("EventBanner").child(Event +" "+ currentUser).removeValue();
+                reference.child("Club").child(currentUser).child("Club Service").child(Event).removeValue();
+                reference.child("EventList").child(Event +" "+ currentUser+" CS").removeValue();
+                reference.child("CSBanner").child(Event +" "+ currentUser).removeValue();
             }
         });
 
@@ -99,7 +99,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             imageSlider=itemView.findViewById(R.id.image_slider);
             dlt = itemView.findViewById(R.id.dltEvent);
         }
-        public void bind(final event item, final com.example.cms.OnEventClickListener listener) {
+        public void bind(final event item, final OnEventClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
 

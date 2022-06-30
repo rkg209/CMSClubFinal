@@ -42,7 +42,7 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class EventActivity extends AppCompatActivity {
+public class CSActivity extends AppCompatActivity {
 
     public TextView textEventName;
     public TextView textEventDate;
@@ -86,27 +86,27 @@ public class EventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_organize);
+        setContentView(R.layout.activity_cs_organize);
 
-        textEventName = findViewById(R.id.txt_event_name);
-        ed_event = findViewById(R.id.ed_event_name);
-        btn_event_edit = findViewById(R.id.btn_event_name_edit);
-        btn_event_edit_save = findViewById(R.id.btn_event_name_edit_save);
-        textEventLink = findViewById(R.id.txt_event_link);
-        ed_event_link = findViewById(R.id.ed_event_link);
-        btn_event_link_edit = findViewById(R.id.btn_event_link_edit);
-        btn_event_link_edit_save = findViewById(R.id.btn_event_link_edit_save);
+        textEventName = findViewById(R.id.txt_cs_name);
+        ed_event = findViewById(R.id.ed_cs_name);
+        btn_event_edit = findViewById(R.id.btn_cs_name_edit);
+        btn_event_edit_save = findViewById(R.id.btn_cs_name_edit_save);
+        textEventLink = findViewById(R.id.txt_cs_link);
+        ed_event_link = findViewById(R.id.ed_cs_link);
+        btn_event_link_edit = findViewById(R.id.btn_cs_link_edit);
+        btn_event_link_edit_save = findViewById(R.id.btn_cs_link_edit_save);
 
-        btn_event_all_save = findViewById(R.id.btn_event_all_save);
-        btn_event_date = findViewById(R.id.btn_event_date);
-        btn_event_poster = findViewById(R.id.btn_event_file);
-        btn_event_description = findViewById(R.id.btn_event_description);
+        btn_event_all_save = findViewById(R.id.btn_cs_all_save);
+        btn_event_date = findViewById(R.id.btn_cs_date);
+        btn_event_poster = findViewById(R.id.btn_cs_file);
+        btn_event_description = findViewById(R.id.btn_cs_description);
 
-        textEventDate = findViewById(R.id.txt_event_date);
-        textEventFileUri = findViewById(R.id.txt_event_file_uri);
-        textEventDescription = findViewById(R.id.txt_event_description);
+        textEventDate = findViewById(R.id.txt_cs_date);
+        textEventFileUri = findViewById(R.id.txt_cs_file_uri);
+        textEventDescription = findViewById(R.id.txt_cs_description);
 
-        img_event_poster = findViewById(R.id.img_event_poster);
+        img_event_poster = findViewById(R.id.img_cs_poster);
 
         dbRef = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
@@ -117,7 +117,7 @@ public class EventActivity extends AppCompatActivity {
         btn_event_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EventActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CSActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
                 textEventName.setVisibility(View.GONE);
                 ed_event.setVisibility(View.VISIBLE);
                 btn_event_edit.setVisibility(View.GONE);
@@ -141,7 +141,7 @@ public class EventActivity extends AppCompatActivity {
         btn_event_link_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EventActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CSActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
                 textEventLink.setVisibility(View.GONE);
                 ed_event_link.setVisibility(View.VISIBLE);
                 btn_event_link_edit.setVisibility(View.GONE);
@@ -158,14 +158,14 @@ public class EventActivity extends AppCompatActivity {
                 btn_event_link_edit_save.setVisibility(View.GONE);
                 textEventLink.setVisibility(View.VISIBLE);
                 btn_event_link_edit.setVisibility(View.VISIBLE);
-                Toast.makeText(EventActivity.this, EVENTLINK, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CSActivity.this, EVENTLINK, Toast.LENGTH_SHORT).show();
             }
         });
 
         btn_event_poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePicker.with(EventActivity.this)
+                ImagePicker.with(CSActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
@@ -199,7 +199,7 @@ public class EventActivity extends AppCompatActivity {
         btn_event_description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(EventActivity.this);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CSActivity.this);
                 View view2 = getLayoutInflater().inflate(R.layout.multiline_edittext_dialog_box,null);
                 alert.setView(view2);
                 final AlertDialog alertDialog = alert.create();
@@ -221,7 +221,7 @@ public class EventActivity extends AppCompatActivity {
                         }
 
                         new SweetAlertDialog(
-                                EventActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                CSActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Error")
                                 .setContentText("Description must be greater than 20 Characters")
                                 .show();
@@ -242,7 +242,7 @@ public class EventActivity extends AppCompatActivity {
 
                 //String clubName = "WSM";
                 if ((EVENTDATE == null)||(EVENTNAME == null)||(EVENTDESCRIPTION == null) || (EVENTPOSTERURI == null)){
-                    Toast.makeText(EventActivity.this, "All Fields are Mandatory", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CSActivity.this, "All Fields are Mandatory", Toast.LENGTH_SHORT).show();
                 }
 //                if (EVENTDESCRIPTION == null){
 //                    Toast.makeText(EventActivity.this, "Description are Mandatory", Toast.LENGTH_SHORT).show();
@@ -255,10 +255,10 @@ public class EventActivity extends AppCompatActivity {
                     hashMap.put("Link", EVENTLINK);
 
 
-                    dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    dbRef.child("Club").child(currentUser).child("Club Service").child(EVENTDATE).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                        //    Toast.makeText(EventActivity.this, "Event Added", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(CSActivity.this, "CS Added", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -269,10 +269,10 @@ public class EventActivity extends AppCompatActivity {
                     hashMap2.put("Club", currentUser);
                     hashMap2.put("Link", EVENTLINK);
 
-                    dbRef.child("EventList").child(EVENTDATE + " " + currentUser).updateChildren(hashMap2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    dbRef.child("EventList").child(EVENTDATE + " " + currentUser +" CS").updateChildren(hashMap2).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            //Toast.makeText(EventActivity.this, "EventList Added", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(CSActivity.this, "CS Added", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -286,13 +286,13 @@ public class EventActivity extends AppCompatActivity {
                             reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).child("Banner").setValue(uri.toString());
-                                    dbRef.child("EventBanner").child(EVENTDATE + " " + currentUser).child("Banner").setValue(uri.toString());
+                                    dbRef.child("Club").child(currentUser).child("Club Service").child(EVENTDATE).child("Banner").setValue(uri.toString());
+                                    dbRef.child("CSBanner").child(EVENTDATE + " " + currentUser).child("Banner").setValue(uri.toString());
                                 }
                             });
                         }
                     });
-                    Toast.makeText(EventActivity.this, "Event Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CSActivity.this, "Club Service Added", Toast.LENGTH_SHORT).show();
                 }
             }
         });

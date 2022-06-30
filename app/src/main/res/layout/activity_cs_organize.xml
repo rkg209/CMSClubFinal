@@ -32,7 +32,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_event_name_edit"
+                    android:id="@+id/btn_cs_name_edit"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -49,7 +49,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_event_name_edit_save"
+                    android:id="@+id/btn_cs_name_edit_save"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -65,12 +65,12 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck,UnusedAttribute" />
 
                 <TextView
-                    android:id="@+id/txt_event_name"
+                    android:id="@+id/txt_cs_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:text="Event Name"
+                    android:text="Club Service Name"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                     app:layout_constraintVertical_bias="0.511" />
 
                 <EditText
-                    android:id="@+id/ed_event_name"
+                    android:id="@+id/ed_cs_name"
                     android:layout_width="240dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -112,7 +112,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txt_event_date"
+                android:id="@+id/txt_cs_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -136,7 +136,7 @@
 <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_event_date"
+                android:id="@+id/btn_cs_date"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="left"
@@ -170,11 +170,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txt_event_file_uri"
+                android:id="@+id/txt_cs_file_uri"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Event Banner URI"
+                android:text="Banner URI"
                 android:textSize="20sp"
                 android:textAlignment="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -184,7 +184,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_event_file"
+                android:id="@+id/btn_cs_file"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
                 android:layout_gravity="left"
@@ -216,11 +216,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txt_event_description"
+                android:id="@+id/txt_cs_description"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Add Description"
+                android:text="Add description"
                 android:textSize="20sp"
                 android:textAlignment="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -230,7 +230,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_event_description"
+                android:id="@+id/btn_cs_description"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="left"
@@ -272,7 +272,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_event_link_edit"
+                    android:id="@+id/btn_cs_link_edit"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -289,7 +289,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_event_link_edit_save"
+                    android:id="@+id/btn_cs_link_edit_save"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -305,12 +305,12 @@
                     tools:ignore="RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck,UnusedAttribute" />
 
                 <TextView
-                    android:id="@+id/txt_event_link"
+                    android:id="@+id/txt_cs_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:text="Event Link (If Required)"
+                    android:text="Link (If Required)"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -318,7 +318,7 @@
                     app:layout_constraintVertical_bias="0.511" />
 
                 <EditText
-                    android:id="@+id/ed_event_link"
+                    android:id="@+id/ed_cs_link"
                     android:layout_width="240dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -336,7 +336,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/img_event_poster"
+        android:id="@+id/img_cs_poster"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginLeft="30dp"
@@ -346,7 +346,7 @@
         android:visibility="gone"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_event_all_save"
+        android:id="@+id/btn_cs_all_save"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"

@@ -90,13 +90,31 @@ public class fragment_home extends Fragment {
             }
         });
 
+        final List<SlideModel> list2=new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("Club").child(currentUser).child("Club Service").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data: snapshot.getChildren()){
+
+                    String uri=data.child("Banner").getValue().toString();
+                    list2.add(new SlideModel(uri,ScaleTypes.FIT));
+                    imageSlider2.setImageList(list2,ScaleTypes.FIT);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 //        arrayList.add(new SlideModel(R.drawable.img_example,"My Photo",null));
 //        arrayList.add(new SlideModel(R.drawable.img_1,null));
 //        arrayList.add(new SlideModel(R.drawable.img_2,null));
 //        arrayList.add(new SlideModel(R.drawable.img_3,null));
 //        arrayList.add(new SlideModel(R.drawable.img_4,null));
        // imageSlider.setImageList(arrayList, ScaleTypes.FIT);
-        imageSlider2.setImageList(arrayList,ScaleTypes.FIT);
+        //imageSlider2.setImageList(arrayList,ScaleTypes.FIT);
         return view;
     }
 }
