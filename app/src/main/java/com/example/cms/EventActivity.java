@@ -48,8 +48,10 @@ public class EventActivity extends AppCompatActivity {
     public TextView textEventDate;
     public TextView textEventFileUri;
     public TextView textEventDescription;
+    public TextView textEventLink;
 
     public EditText ed_event;
+    public EditText ed_event_link;
 
     public AppCompatButton btn_event_edit;
     public AppCompatButton btn_event_edit_save;
@@ -57,6 +59,8 @@ public class EventActivity extends AppCompatActivity {
     public AppCompatButton btn_event_poster;
     public AppCompatButton btn_event_date;
     public AppCompatButton btn_event_description;
+    public AppCompatButton btn_event_link_edit;
+    public AppCompatButton btn_event_link_edit_save;
 
 
     public EditText ed_event_description;
@@ -71,6 +75,8 @@ public class EventActivity extends AppCompatActivity {
     public String EVENTDATE;
     public String EVENTDESCRIPTION;
     public Uri EVENTPOSTERURI;
+    public String EVENTLINK = "";
+
 
     private FirebaseUser user;
     private DatabaseReference dbRef;
@@ -86,6 +92,10 @@ public class EventActivity extends AppCompatActivity {
         ed_event = findViewById(R.id.ed_event_name);
         btn_event_edit = findViewById(R.id.btn_event_name_edit);
         btn_event_edit_save = findViewById(R.id.btn_event_name_edit_save);
+        textEventLink = findViewById(R.id.txt_event_link);
+        ed_event_link = findViewById(R.id.ed_event_link);
+        btn_event_link_edit = findViewById(R.id.btn_event_link_edit);
+        btn_event_link_edit_save = findViewById(R.id.btn_event_link_edit_save);
 
         btn_event_all_save = findViewById(R.id.btn_event_all_save);
         btn_event_date = findViewById(R.id.btn_event_date);
@@ -107,6 +117,7 @@ public class EventActivity extends AppCompatActivity {
         btn_event_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(EventActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
                 textEventName.setVisibility(View.GONE);
                 ed_event.setVisibility(View.VISIBLE);
                 btn_event_edit.setVisibility(View.GONE);
@@ -124,7 +135,30 @@ public class EventActivity extends AppCompatActivity {
                 textEventName.setVisibility(View.VISIBLE);
                 btn_event_edit.setVisibility(View.VISIBLE);
 
+            }
+        });
 
+        btn_event_link_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(EventActivity.this, "To Save Click on Add Symbol", Toast.LENGTH_SHORT).show();
+                textEventLink.setVisibility(View.GONE);
+                ed_event_link.setVisibility(View.VISIBLE);
+                btn_event_link_edit.setVisibility(View.GONE);
+                btn_event_link_edit_save.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btn_event_link_edit_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EVENTLINK = ed_event_link.getText().toString();
+                textEventLink.setText(EVENTLINK);
+                ed_event_link.setVisibility(View.GONE);
+                btn_event_link_edit_save.setVisibility(View.GONE);
+                textEventLink.setVisibility(View.VISIBLE);
+                btn_event_link_edit.setVisibility(View.VISIBLE);
+                Toast.makeText(EventActivity.this, EVENTLINK, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,7 +223,7 @@ public class EventActivity extends AppCompatActivity {
                         new SweetAlertDialog(
                                 EventActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Error")
-                                .setContentText("Description must be greater than 20")
+                                .setContentText("Description must be greater than 20 Characters")
                                 .show();
                     }
                 });
@@ -207,43 +241,58 @@ public class EventActivity extends AppCompatActivity {
                 //store above data in firebase
 
                 //String clubName = "WSM";
+                if ((EVENTDATE == null)||(EVENTNAME == null)||(EVENTDESCRIPTION == null) || (EVENTPOSTERURI == null)){
+                    Toast.makeText(EventActivity.this, "All Fields are Mandatory", Toast.LENGTH_SHORT).show();
+                }
+//                if (EVENTDESCRIPTION == null){
+//                    Toast.makeText(EventActivity.this, "Description are Mandatory", Toast.LENGTH_SHORT).show();
+//                }
+                else {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("Name", EVENTNAME);
+                    hashMap.put("Date", EVENTDATE);
+                    hashMap.put("Description", EVENTDESCRIPTION);
+                    hashMap.put("Link", EVENTLINK);
 
-                HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("Name", EVENTNAME);
-                hashMap.put("Date", EVENTDATE);
-                hashMap.put("Description", EVENTDESCRIPTION);
 
-                dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(EventActivity.this, "Event Added", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(EventActivity.this, "Event Added", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                HashMap<String,Object> hashMap2 = new HashMap<>();
-                hashMap.put("Name", EVENTNAME);
-                hashMap.put("Date", EVENTDATE);
-                hashMap.put("Club", currentUser);
+                    //         Toast.makeText(EventActivity.this, "in" + currentUser, Toast.LENGTH_SHORT).show();
+                    HashMap<String, Object> hashMap2 = new HashMap<>();
+                    hashMap2.put("Name", EVENTNAME);
+                    hashMap2.put("Date", EVENTDATE);
+                    hashMap2.put("Club", currentUser);
+                    hashMap2.put("Link", EVENTLINK);
 
-                dbRef.child("EventList").child(EVENTDATE).updateChildren(hashMap2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(EventActivity.this, "EventList Added", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    dbRef.child("EventList").child(EVENTDATE + " " + currentUser).updateChildren(hashMap2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(EventActivity.this, "EventList Added", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                StorageReference reference= storage.getReference().child(currentUser+"/Event/"+EVENTDATE+".jpg");
-                reference.putFile(EVENTPOSTERURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).child("Banner").setValue(uri.toString());
-                            }
-                        });
-                    }
-                });
+                    //         Toast.makeText(EventActivity.this, "out" + currentUser, Toast.LENGTH_SHORT).show();
+
+
+                    StorageReference reference = storage.getReference().child(currentUser + "/Event/" + EVENTDATE + ".jpg");
+                    reference.putFile(EVENTPOSTERURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    dbRef.child("Club").child(currentUser).child("Event").child(EVENTDATE).child("Banner").setValue(uri.toString());
+                                    dbRef.child("EventList").child(EVENTDATE + " " + currentUser).child("Banner").setValue(uri.toString());
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     }
@@ -255,8 +304,8 @@ public class EventActivity extends AppCompatActivity {
         EVENTPOSTERURI= data.getData();
         textEventFileUri.setTextSize(10f);
         textEventFileUri.setText(EVENTPOSTERURI.getPath());
-        img_event_poster.setVisibility(View.VISIBLE);
-        img_event_poster.setImageURI(EVENTPOSTERURI);
+        //img_event_poster.setVisibility(View.VISIBLE);
+        //img_event_poster.setImageURI(EVENTPOSTERURI);
 
     }
 
