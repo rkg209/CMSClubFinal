@@ -27,6 +27,7 @@ public class club_login extends Fragment {
     EditText ed_id;
     EditText ed_pass;
     AppCompatButton btn_login;
+    AppCompatButton btn_forget;
     TextView txt_forget;
     private FirebaseAuth auth;
 
@@ -40,6 +41,7 @@ public class club_login extends Fragment {
         ed_id = view.findViewById(R.id.ed_id);
         ed_pass = view.findViewById(R.id.ed_pass);
         btn_login = view.findViewById(R.id.btn_login);
+        btn_forget = view.findViewById(R.id.clubForgetPass);
 
         auth = FirebaseAuth.getInstance();
 
@@ -55,6 +57,23 @@ public class club_login extends Fragment {
                 }
             }
         });
+
+        btn_forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Email = ed_id.getText().toString();
+                auth.sendPasswordResetEmail(Email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+
         return view;
     }
 
@@ -74,7 +93,7 @@ public class club_login extends Fragment {
                             }
                             //updateUI(user);
                         } else {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }

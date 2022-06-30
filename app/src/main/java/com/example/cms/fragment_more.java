@@ -44,6 +44,7 @@ public class fragment_more extends Fragment {
 
     public AppCompatButton logo_button;
     public Button update;
+    public  Button logout;
 
     private static String currentUser;
     private FirebaseStorage storage;
@@ -66,6 +67,7 @@ public class fragment_more extends Fragment {
 
         logo_button=view.findViewById(R.id.more_btn_edit_profile_img);
         update = view.findViewById(R.id.more_update);
+        logout = view.findViewById(R.id.logout);
 
         reference= FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
@@ -77,11 +79,11 @@ public class fragment_more extends Fragment {
 
         username.setText(currentUser);
         email.setText(user.getEmail().toString());
-        FirebaseDatabase.getInstance().getReference().child("Club").child(currentUser).child("Profile").addValueEventListener(new ValueEventListener() {
+        reference.child("Club").child(currentUser).child("Profile").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 thought.setText(snapshot.child("Thought").getValue(String.class));
-                fullname.setText(snapshot.child("Full Name").getValue(String.class));
+                fullname.setText(snapshot.child("FullName").getValue(String.class));
                 officiallink.setText(snapshot.child("Official Link").getValue(String.class));
                 String uri= snapshot.child("Logo").getValue(String.class);
                 Glide.with(clubLogo.getContext()).load(uri).into(clubLogo);
@@ -106,8 +108,31 @@ public class fragment_more extends Fragment {
             }
         });
 
- /*.       @Override
-        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reference.child("Club").child(currentUser).child("Profile").child("FullName").setValue(fullname.getText().toString());
+                reference.child("Club").child(currentUser).child("Profile").child("Thought").setValue(thought.getText().toString());
+                reference.child("Club").child(currentUser).child("Profile").child("Official Link").setValue(officiallink.getText().toString());
+
+                Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Signing Out", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
+
+        return view;
+    }
+
+     @Override
+     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
 
             Uri uri = data.getData();
@@ -125,11 +150,6 @@ public class fragment_more extends Fragment {
                     });
                 }
             });
-
-
-        }*/
-
-        return view;
-
-    }
+         Toast.makeText(getContext(), "Logo Changed", Toast.LENGTH_SHORT).show();
+        }
 }

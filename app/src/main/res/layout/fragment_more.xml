@@ -62,8 +62,8 @@
 
         <EditText
             android:id="@+id/more_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="297dp"
+            android:layout_height="47dp"
             android:layout_marginBottom="344dp"
             android:ems="10"
             android:hint="Full Club Name"
@@ -75,8 +75,8 @@
 
         <EditText
             android:id="@+id/more_thought"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="292dp"
+            android:layout_height="65dp"
             android:layout_marginBottom="252dp"
             android:ems="10"
             android:hint="Thought"
@@ -88,8 +88,8 @@
 
         <EditText
             android:id="@+id/more_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="292dp"
+            android:layout_height="59dp"
             android:layout_marginBottom="148dp"
             android:ems="10"
             android:hint="Official Website Link"
@@ -105,9 +105,22 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
             android:text="Update"
+            android:backgroundTint="#F69273"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.836"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:text="Logout"
+            android:backgroundTint="#EF0707"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.179"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
