@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cms.ClubHomePage;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,7 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 */
-        launcher=registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+    /*    launcher=registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
                 logo.setImageURI(result);
@@ -96,11 +97,26 @@ public class UpdateProfile extends AppCompatActivity {
                 });
             }
         });
+*/
+//        logo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                launcher.launch("image/*");
+//            }
+//        });
 
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launcher.launch("image/*");
+                if(updateName.getText().toString().equals("")){
+                    Toast.makeText(UpdateProfile.this, "First Enter UserName", Toast.LENGTH_SHORT).show();
+                }else{
+                    ImagePicker.with(UpdateProfile.this)
+                            .crop()	    			//Crop image(Optional), Check Customization for more option
+                            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                            .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                            .start();
+                }
             }
         });
 
@@ -109,8 +125,11 @@ public class UpdateProfile extends AppCompatActivity {
             public void onClick(View view) {
                 String username = updateName.getText().toString();
                 //Toast.makeText(UpdateProfile.this, username, Toast.LENGTH_SHORT).show();
-
-                updateProfile(username);
+                if (username.equals("")){
+                    Toast.makeText(UpdateProfile.this, "Both Fields are Mandatory", Toast.LENGTH_SHORT).show();
+                }else {
+                    updateProfile(username);
+                }
                 //startActivity(new Intent(UpdateProfile.this, ClubHomePage.class));
                 //Toast.makeText(UpdateProfile.this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
              }
@@ -144,6 +163,31 @@ public class UpdateProfile extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Uri uri = data.getData();
+        logo.setImageURI(uri);
+
+        String currentUser = updateName.getText().toString();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        StorageReference MBreference= storage.getReference().child(currentUser +"/logo.jpg");
+        MBreference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                MBreference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        reference.child("Club").child(currentUser).child("Profile").child("Logo").setValue(uri.toString());
+                    }
+                });
+            }
+        });
+        Toast.makeText(this, "Logo Changed", Toast.LENGTH_SHORT).show();
     }
 
 }

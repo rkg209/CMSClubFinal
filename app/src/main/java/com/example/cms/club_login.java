@@ -62,15 +62,19 @@ public class club_login extends Fragment {
             @Override
             public void onClick(View view) {
                 String Email = ed_id.getText().toString();
-                auth.sendPasswordResetEmail(Email)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
+                if (Email.equals("")){
+                    Toast.makeText(getContext(), "Enter Valid Email", Toast.LENGTH_SHORT).show();
+                }else {
+                    auth.sendPasswordResetEmail(Email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
