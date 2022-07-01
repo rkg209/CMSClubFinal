@@ -63,7 +63,7 @@ public class club_login extends Fragment {
             public void onClick(View view) {
                 String Email = ed_id.getText().toString();
                 if (Email.equals("")){
-                    Toast.makeText(getContext(), "Enter Valid Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Enter Your in Username Field Email", Toast.LENGTH_SHORT).show();
                 }else {
                     auth.sendPasswordResetEmail(Email)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -72,6 +72,7 @@ public class club_login extends Fragment {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
                                     }
+                                    else{Toast.makeText(getContext(), "Email is not Authenticated", Toast.LENGTH_SHORT).show();}
                                 }
                             });
                 }
@@ -109,8 +110,20 @@ public class club_login extends Fragment {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = auth.getCurrentUser();
+
         if(currentUser != null){
-            startActivity(new Intent(getContext(), com.example.cms.ClubHomePage.class));
+            String name = currentUser.getDisplayName();
+            String email = currentUser.getEmail();
+            //Toast.makeText(getContext(), name, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), email, Toast.LENGTH_SHORT).show();
+
+            //startActivity(new Intent(getContext(), com.example.cms.ClubHomePage.class));
+
+            if(name.equals(email)){                 //checks if user is loging in for first time
+                startActivity(new Intent(getContext(), com.example.cms.UpdateProfile.class));
+            }
+            else{            startActivity(new Intent(getContext(), com.example.cms.ClubHomePage.class));
+            }
         }
     }
 }

@@ -244,9 +244,6 @@ public class EventActivity extends AppCompatActivity {
                 if ((EVENTDATE == null)||(EVENTNAME == null)||(EVENTDESCRIPTION == null) || (EVENTPOSTERURI == null)){
                     Toast.makeText(EventActivity.this, "All Fields are Mandatory", Toast.LENGTH_SHORT).show();
                 }
-//                if (EVENTDESCRIPTION == null){
-//                    Toast.makeText(EventActivity.this, "Description are Mandatory", Toast.LENGTH_SHORT).show();
-//                }
                 else {
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("Name", EVENTNAME);
@@ -262,7 +259,6 @@ public class EventActivity extends AppCompatActivity {
                         }
                     });
 
-                    //         Toast.makeText(EventActivity.this, "in" + currentUser, Toast.LENGTH_SHORT).show();
                     HashMap<String, Object> hashMap2 = new HashMap<>();
                     hashMap2.put("Name", EVENTNAME);
                     hashMap2.put("Date", EVENTDATE);
@@ -275,9 +271,6 @@ public class EventActivity extends AppCompatActivity {
                             //Toast.makeText(EventActivity.this, "EventList Added", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-                    //         Toast.makeText(EventActivity.this, "out" + currentUser, Toast.LENGTH_SHORT).show();
-
 
                     StorageReference reference = storage.getReference().child(currentUser + "/Event/" + EVENTDATE + ".jpg");
                     reference.putFile(EVENTPOSTERURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

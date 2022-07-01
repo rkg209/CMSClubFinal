@@ -47,7 +47,7 @@ public class UpdateProfile extends AppCompatActivity {
 
     ActivityResultLauncher<String> launcher;
     private ImageView logo;
-    private static Uri LogoUri ;
+    private static Uri LogoUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,15 +108,15 @@ public class UpdateProfile extends AppCompatActivity {
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(updateName.getText().toString().equals("")){
-                    Toast.makeText(UpdateProfile.this, "First Enter UserName", Toast.LENGTH_SHORT).show();
-                }else{
+//                if(updateName.getText().toString().equals("")){
+//                    Toast.makeText(UpdateProfile.this, "First Enter UserName", Toast.LENGTH_SHORT).show();
+//                }else{
                     ImagePicker.with(UpdateProfile.this)
                             .crop()	    			//Crop image(Optional), Check Customization for more option
                             .compress(1024)			//Final image size will be less than 1 MB(Optional)
                             .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                             .start();
-                }
+ //               }
             }
         });
 
@@ -126,7 +126,7 @@ public class UpdateProfile extends AppCompatActivity {
                 String username = updateName.getText().toString();
                 //Toast.makeText(UpdateProfile.this, username, Toast.LENGTH_SHORT).show();
                 if (username.equals("")){
-                    Toast.makeText(UpdateProfile.this, "Both Fields are Mandatory", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateProfile.this, "UserName is Mandatory", Toast.LENGTH_SHORT).show();
                 }else {
                     updateProfile(username);
                 }
@@ -163,6 +163,25 @@ public class UpdateProfile extends AppCompatActivity {
                         }
                     }
                 });
+
+        if (LogoUri==null){
+            dbRef.child("Club").child(name).child("Profile").child("Logo").setValue("");
+        }
+        else {
+            StorageReference MBreference = storage.getReference().child(name + "/logo.jpg");
+            MBreference.putFile(LogoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    MBreference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            dbRef.child("Club").child(name).child("Profile").child("Logo").setValue(uri.toString());
+                        }
+                    });
+                }
+            });
+            //Toast.makeText(this, "Logo Changed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -170,9 +189,10 @@ public class UpdateProfile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         Uri uri = data.getData();
+        LogoUri = data.getData();
         logo.setImageURI(uri);
 
-        String currentUser = updateName.getText().toString();
+/*        String currentUser = updateName.getText().toString();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         StorageReference MBreference= storage.getReference().child(currentUser +"/logo.jpg");
@@ -187,7 +207,7 @@ public class UpdateProfile extends AppCompatActivity {
                 });
             }
         });
-        Toast.makeText(this, "Logo Changed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Logo Changed", Toast.LENGTH_SHORT).show();*/
     }
 
 }
